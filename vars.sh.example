@@ -1,0 +1,15 @@
+#!/bin/bash
+
+VER="112.0.5615.39"
+BROMITE_REPO="https://github.com/uazo/bromite"
+PATCH_BRANCH="next-v112"
+
+BASE_DIR=`pwd`
+SRC_DIR="$BASE_DIR/chromium/src"
+# SRC_DIR="chromium-$VER"
+SRC_TAR="$SRC_DIR.tar.xz"
+
+
+SKIP_SRC=0
+SKIP_BROMITE=0
+SKIP_EXTRACT=0
