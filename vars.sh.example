@@ -1,7 +1,7 @@
 #!/bin/bash
 
 VER="112.0.5615.39"
-BROMITE_REPO="https://github.com/uazo/bromite"
+CROMITE_REPO="https://github.com/uazo/cromite"
 PATCH_BRANCH="next-v112"
 
 BASE_DIR=`pwd`
@@ -11,5 +11,5 @@ SRC_TAR="$SRC_DIR.tar.xz"
 
 
 SKIP_SRC=0
-SKIP_BROMITE=0
+SKIP_CROMITE=0
 SKIP_EXTRACT=0

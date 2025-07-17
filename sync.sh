@@ -8,9 +8,9 @@ do
 	if [ "--skip-src" = $1 ]
 	then
 		SKIP_SRC=1
-	elif [ "--skip-bromite" = $1 ]
+	elif [ "--skip-cromite" = $1 ]
 	then
-		SKIP_BROMITE=1
+		SKIP_CROMITE=1
 	fi
 	shift
 done
@@ -26,15 +26,15 @@ PATH=$PATH:$BASE_DIR/depot_tools
 echo "Downloading source and patches..."
 
 # Bromite
-if [ $SKIP_BROMITE -eq 0 ] && [ ! -d "bromite" ]
+if [ $SKIP_CROMITE -eq 0 ] && [ ! -d "cromite" ]
 then
-	git clone $BROMITE_REPO bromite
+	git clone $CROMITE_REPO cromite
 else
 	echo "Skipped cloning Bromite repo."
 	echo
 fi
 
-cd bromite
+cd cromite
 git fetch origin $PATCH_BRANCH
 git checkout $PATCH_BRANCH
 git pull
