@@ -37,7 +37,7 @@ fi
 cd cromite
 git fetch origin $PATCH_BRANCH
 git checkout $PATCH_BRANCH
-git pull
+# git pull
 export VER=`cat build/RELEASE`
 echo "Current release $VER"
 cd ..
@@ -72,10 +72,30 @@ echo >../.gclient "solutions = ["
 echo >>../.gclient "  { \"name\"        : 'src',"
 echo >>../.gclient "    \"url\"         : 'https://chromium.googlesource.com/chromium/src.git@$VERSION_SHA',"
 echo >>../.gclient "    \"deps_file\"   : 'DEPS',"
-echo >>../.gclient "    \"managed\"     : True,"
+echo >>../.gclient "    \"managed\"     : False,"
 echo >>../.gclient "    \"custom_deps\" : {"
+echo >>../.gclient "        \"src/third_party/apache-windows-arm64\": None,"
+echo >>../.gclient "        \"src/third_party/updater/chrome_win_x86\": None,"
+echo >>../.gclient "        \"src/third_party/updater/chrome_win_x86_64\": None,"
+echo >>../.gclient "        \"src/third_party/updater/chromium_win_x86\": None,"
+echo >>../.gclient "        \"src/third_party/updater/chromium_win_x86_64\": None,"
+echo >>../.gclient "        \"src/third_party/gperf\": None,"
+echo >>../.gclient "        \"src/third_party/lighttpd\": None,"
+echo >>../.gclient "        \"src/third_party/lzma_sdk/bin/host_platform\": None,"
+echo >>../.gclient "        \"src/third_party/lzma_sdk/bin/win64\": None,"
+echo >>../.gclient "        \"src/third_party/perl\": None,"
+echo >>../.gclient "        \"src/tools/skia_goldctl/win\": None,"
+echo >>../.gclient "        \"src/third_party/screen-ai/windows_amd64\": None,"
+echo >>../.gclient "        \"src/third_party/screen-ai/windows_386\": None,"
+echo >>../.gclient "        \"src/third_party/cronet_android_mainline_clang/linux-amd64\": None,"
+echo >>../.gclient "        \"src/testing/libfuzzer/fuzzers/wasm_corpus\": None,"
 echo >>../.gclient "    },"
-echo >>../.gclient "    \"custom_vars\": {},"
+echo >>../.gclient "    \"custom_vars\": {"
+echo >>../.gclient "       \"checkout_android_prebuilts_build_tools\": True,"
+echo >>../.gclient "       \"checkout_telemetry_dependencies\": False,"
+echo >>../.gclient "       \"checkout_pgo_profiles\": 'True',"
+echo >>../.gclient "       \"codesearch\": 'Debug',"
+echo >>../.gclient "    },"
 echo >>../.gclient "  },"
 echo >>../.gclient "]"
 echo >>../.gclient "target_os=['android']"
@@ -100,4 +120,11 @@ git config user.name "Your Name"
 # 	echo "Skipped extracting the source tarball"
 # fi
 echo
+
+# from cromite script
+gclient runhooks
+tools/clang/scripts/update.py
+tools/clang/scripts/update.py --package=objdump
+rm -rf third_party/angle/third_party/VK-GL-CTS/
+
 popd > /dev/null
